@@ -1,0 +1,69 @@
+[user]
+	name = Макар
+	email = makar912@mail.ru
+[core]
+    editor = code --wait
+    autocrlf = true
+    safecrlf = true
+    ignorecase = false
+[color]
+    ui = auto
+[help]
+    autocorrect = 1
+[init]
+    defaultBranch = main
+[pull]
+    ff = only
+    rebase = true
+[push]
+    autoSetupRemote = true
+    default = simple
+[alias]
+    co = checkout
+    br = branch
+    ci = commit -am
+    st = status
+    s = status -s
+    pl = pull
+    ps = push
+    cl = clone
+    lg = log --oneline --graph --all
+    ll = log --pretty=format:'%h - %d %s (%cr) %an'
+    last = log -1 HEAD
+    cb = checkout -b
+    bd = branch -d
+    bD = branch -D
+    ba = branch -a -v
+    ac = !git add -A && git commit
+    acm = "!git add -A && git commit -m"
+    setremote = "!f() { \
+        git remote add origin \"$1\" && \
+        git branch -M main && \
+        git push -u origin main; \
+    }; f"
+    amend = commit --amend
+    undo = checkout --
+    d = diff
+    ds = diff --staged
+    diffbr = diff --name-only
+    prune-branches = !git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d
+    ignored = !git ls-files -v | grep '^[[:lower:]]'
+    patch = !git diff --patch > patch.diff
+    subupdate = !git submodule update --init --recursive
+    wip = commit -am "WIP"
+    new-lab = !f() { git checkout -b lab/$1/$2; }; f
+    publish = !git push -u origin HEAD
+    sync = !git fetch origin && git rebase origin/main
+    submit = !git push -u origin HEAD
+    clean-branches = !git branch --merged | grep -v '\\*\\|main' | xargs -n 1 git branch -d
+[merge]
+    tool = meld
+[diff]
+    tool = meld
+[credential]
+    helper = manager
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
